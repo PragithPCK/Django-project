@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2 class="text-success">Payment Successful!</h2>
+    <p class="lead">Thank you for booking <strong>{{ package.title }}</strong>.</p>
+    <p>Your payment of ₹{{ package.price }} has been received.</p>
+    <a href="{% url 'user_dashboard' %}" class="btn btn-primary mt-3">Go to Dashboard</a>
+</div>
+{% endblock %}
+

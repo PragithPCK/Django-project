@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+<style>
+    .dashboard-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    .dashboard-container h2 {
+        color: #343a40;
+        margin-bottom: 20px;
+    }
+
+    .welcome {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+      .logout {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .logout a {
+        background-color: #007bff;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .logout a:hover {
+        background-color: #0056b3;
+    }
+
+    .add-package-btn {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .add-package-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .package-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .package-item {
+        background-color: white;
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+
+    .package-item strong {
+        font-size: 18px;
+        color: #007bff;
+    }
+
+    .package-item a {
+        display: inline-block;
+        margin-top: 10px;
+        color: white;
+        text-decoration: none;
+    }
+
+    .package-item a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="dashboard-container">
+            <div class="nav__logo">
+          <a href="#" class="logo">Travel<span>Guide</span></a>
+          <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        </div>
+    <div class="welcome">Welcome, {{ user.username }}!</div>
+    <div class="logout">
+    <p><a href="{% url 'logout' %}">Logout</a></p>
+    <p><a class="add-package-btn" href="{% url 'add_package' %}">➕ Add New Package</a></p>
+
+    <h3>Your Packages</h3>
+    <ul class="package-list">
+        {% for package in packages %}
+        <li class="package-item">
+            <strong>{{ package.title }}</strong><br>
+            <img src="{{ package.image.url }}" alt="{{ package.title }}" style="max-width: 500px; height: auto;">
+            {{ package.description }}<br>
+            <strong>Price:</strong> ₹{{ package.price }}<br>
+            <strong>Duration:</strong> {{ package.duration }} days<br>
+            <strong>Approved:</strong> {{ package.is_approved|yesno:"✅ Yes,❌ No" }}<br>
+            <a href="{% url 'edit_package' package.id %}">✏️ Edit Package</a>
+        </li>
+        {% empty %}
+        <p>No packages added yet.</p>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

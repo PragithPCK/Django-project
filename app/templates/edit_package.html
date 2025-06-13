@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="nav__logo">
+          <a href="#" class="logo">Travel<span>Guide</span></a>
+          <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</div>
+<h2>Edit Package</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Package</button>
+</form>
+{% endblock %}

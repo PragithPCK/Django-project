@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="dashboard-container"></div>
+<div class="nav__logo">
+          <a href="#" class="logo">Travel<span>Guide</span></a>
+          <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</div>
+<h2>{{ package.title }}</h2>
+
+<img src="{{ package.image.url }}" alt="{{ package.title }}" style="max-width: 500px; height: auto;">
+{{ package.description|linebreaks }}
+
+<p>Price: ₹{{ package.price }}</p>
+<p>Duration: {{ package.duration }} days</p>
+{% if user.is_authenticated %}
+    <form method="post" action="{% url 'make_payment' package.id %}">
+        {% csrf_token %}
+        <button type="submit">Book Now</button>
+    </form>
+{% else %}
+    <p>Please <a href="{% url 'login' %}">login</a> to book this package.</p>
+{% endif %}
+{% endblock %}

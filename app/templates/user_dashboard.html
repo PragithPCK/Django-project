@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        margin: 20px;
+    }
+
+    h1, h2, h3 {
+        color: #333;
+        text-align: center;
+    }
+
+    .logout {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .logout a {
+        background-color: #007bff;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .logout a:hover {
+        background-color: #0056b3;
+    }
+
+    .package-list {
+        list-style: none;
+        padding: 0;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .package-list li {
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .package-list a {
+        display: inline-block;
+        margin-top: 10px;
+        background-color: #007bff;
+        color: white;
+        padding: 6px 12px;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .package-list a:hover {
+        background-color: #0056b3;
+    }
+</style>
+<div class="dashboard-container"></div>
+<div class="nav__logo">
+          <a href="#" class="logo">Travel<span>Guide</span></a>
+          <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</div>
+<h2>Welcome, {{ user.username }}!</h2>
+
+<div class="logout">
+    <p><a href="{% url 'logout' %}">Logout</a></p>
+</div>
+
+<h3>Available Packages</h3>
+
+<ul class="package-list">
+    {% for package in packages %}
+    <li>
+        <strong>{{ package.title }}</strong><br>
+        <img src="{{ package.image.url }}" alt="{{ package.title }}" style="max-width: 500px; height: auto;">
+        <P><strong>Price:</strong> ₹{{ package.price }}<br></P>
+        <strong>Duration:</strong> {{ package.duration }} days<br>
+        <a href="{% url 'package_detail' package.id %}">View Details</a>
+    </li>
+    {% empty %}
+    <li>No packages available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+
