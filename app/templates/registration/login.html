@@ -62,12 +62,13 @@
     <input type="text" name="username" required><br>
     <label for="password">Password:</label>
     <input type="password" name="password" required><br>
+    <label for="role">Role:</label>
     <select name="role" required>
         <option value="user">User</option>
         <option value="vendor">Vendor</option>
     </select>
     <button type="submit">Login</button>
-    <a href="{% url 'signup' %}" class="btn">Create new account</a>
+    <p>Create new account <a href="{% url 'signup' %}">Signup</a></p>
     {% if error %}
     <p style="color:red">{{ error }}</p>
   {% endif %}

@@ -6,7 +6,7 @@
     <nav>
       <div class="nav__header">
         <div class="nav__logo">
-          <a href="#" class="logo">Travel<span>Guide/span></a>
+          <a href="#" class="logo">Travel<span>Guide<span></a>
           <link rel="stylesheet" href="{% static 'css/style.css' %}">
         </div>
         <div class="nav__menu__btn" id="menu-btn">
@@ -19,6 +19,8 @@
         <li><a href="#destination">Destinations</a></li>
         <li><a href="#package">Packages</a></li>
         <li><a href="#client">Clients</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'signup' %}">Signup</a></li>
       </ul>
     </nav>
 
